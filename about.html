@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=640px, user-scalable=no">
+    <title>学校通行证</title>
+    <link rel="stylesheet" href="style_2.css">
+    
+</head>
+<body>
+        <div class="back">
+            <div class="logo">
+    
+            </div>
+            <div class="basic">
+                <div class="img">
+                    <img id="preview" />
+                    <br />
+                    <input type="file" name="file" onchange="imgPreview(this)" >
+                </div>
+                <div class="info">
+                    <div class="info_1">
+                            姓名：<input type="text" placeholder="姓名" >
+                    </div>
+                    <div class="info_2">
+                            学院：<input type="text" placeholder="班级" >
+                    </div>
+                    <div class="info_3">
+                            学号：<input type="text" placeholder="学号" >
+                    </div>
+                    
+                    <div class="clock">
+                            <span id="t_1">现在时刻：</span>
+
+                           <div class="year"><input type="text" placeholder="年" value="2021"></div>
+                            <span>&nbsp-</span>
+                           <div class="month"><input type="text" style="width: 60px;" placeholder="月" value="" ></div>
+                            <span>-</span>
+                            <div class="date"><input type="text"  style="width: 60px;" placeholder="日" value="" ></div>
+                            <p id="time">
+                                12:12:12 AM
+                            </p>
+
+                    </div>
+                    <div class="forbid_1">
+                        
+                    </div>
+                    <div class="forbid_2">
+                        <div class="text">
+                            暂无出校权限
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list_1">
+                            1.请您去学生外出报备申请中进行出校申请。
+                        </div>
+                        <div class="list_2">
+                            2.使用过程中如出现误点请联系辅导员进行沟通。
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <script src="index.js" type="text/javascript"></script>
+
+</body>
+</html>
