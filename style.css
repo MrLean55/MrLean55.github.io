@@ -4,7 +4,7 @@ body,h1,h2,h3,h4,h5,h6,p,ul,ol,form{
 }
 
 .back   {
-    width: 70%;
+    width: 700px;
     height: 632px;
     float: left;
     margin-left:calc(50% - 375px);
