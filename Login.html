@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="test"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/babel">
+        class App extends React.Component{
+
+            state={
+                login:true
+            }
+
+            change = ()=>{
+                const {login} = this.state
+                this.setState({
+                    login:!login
+                })
+            }
+
+            render(){
+                return (
+                    <div>
+                        <Header/>
+                        <List login={this.state.login}/>
+                        <Footer change = {this.change} login={this.state.login}/>
+                    </div>  
+                )
+            }
+        }
+        class Header extends React.Component{
+            render(){
+                return (
+                    <div className="Header">
+                        <h1>Sign in to Leo</h1>
+                    </div>
+                )
+            }
+        }
+        class List extends React.Component{
+
+            handleCreate = (e)=>{
+                e.preventDefault()
+
+                if(this.refs.checkbox.checked)
+                {
+                        const data = {
+                            id: this.refs.username.value,
+                            email: this.refs.email.value,
+                            password: this.refs.password.value
+                        }
+                        console.log(data);
+                        axios({
+                        method:"POST",
+                        url:'http://localhost:3000/user',
+                        data:data
+                    }).then(response=>{
+                        alert("注册成功")
+                    },err=>{
+                        alert("用户名已存在，请更换用户名")
+                    })
+                }
+                else{
+                    alert("请勾选协议")
+                }
+            }
+                
+
+            handleLogin = (e)=>{
+                e.preventDefault()
+                if(this.refs.login_checkbox.checked)
+                {
+                        axios({
+                        method:"GET",
+                        url:'http://localhost:3000/user/'+this.refs.log_username.value,
+                        }).then(response=>{
+                            if(this.refs.log_password.value === response.data.password)
+                            {
+                                alert("登录成功")
+                            }
+                            else{
+                                alert("登录失败")
+                            }
+                            
+                        })
+                }
+                else{
+                    alert("请勾选协议")
+                }
+                
+                
+            }
+            render(){
+                return (
+                    <div>
+                        <div style={{display:this.props.login?"block":"none"}} className="Reg_list">
+                        <form action="">
+                            <span>Username</span>
+                            <input ref="username" id="username" type="text"/> <br/>
+                            <span>Email</span>
+                            <input ref="email" id="email" type="email"/> <br/>
+                            <span>Password</span>
+                            <input ref="password" id="password" type="password"/> <br/>
+                            <p>Lorem ipsum  quos dolorum nisi eaque omnis, aspernatur repudiandae reprehenderit dignissimos totam minus expedita! Quam.</p>
+                            <div><input  ref="checkbox" id="checkbox" type="checkbox"/></div>
+                            <button onClick={this.handleCreate} id="create">Create Account</button>
+                        </form>
+                        </div> 
+                        <div style={{display:this.props.login?"none":"block"}} className="Log_list">
+                                <form action="">
+                                    <span>Username</span><input ref="log_username" type="text"/><br/>
+                                    <span>Password</span><input ref="log_password" type="password"/> <br/>
+                                    <p>Lorem ipsum  quos dolorum nisi eaque omnis, aspernatur repudiandae reprehenderit dignissimos totam minus expedita! Quam.</p>
+                                    <div><input  ref="login_checkbox" id="checkbox" type="checkbox"/></div>
+                                    <button onClick={this.handleLogin} id="create">Login</button>
+                                </form>
+                        </div> 
+                    </div>      
+                )
+            }
+        }
+        class Footer extends React.Component{
+
+            handleChange = ()=>{
+                this.props.change()
+            }
+
+            render(){
+                return(     
+                    <div className="Footer">
+                            <button onClick={this.handleChange}>{this.props.login?"Already a Member?":"Not a Member?"}</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<App/>,document.getElementById("test"))
+    </script>
+</body>
+</html>
